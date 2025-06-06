@@ -1,6 +1,7 @@
 import About from "@/components/sections/About";
 import Hero from "@/components/sections/Hero";
 import Portfolio from "@/components/sections/Portfolio";
+import Services from "@/components/sections/Services";
 import Navbar from "@/components/shared/Navbar";
 import Image from "next/image";
 
@@ -10,6 +11,7 @@ export default function Home() {
       <Hero />
       <Portfolio />
       <About />
+      <Services />
     </div>
   );
 }
