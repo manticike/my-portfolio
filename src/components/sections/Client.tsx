@@ -1,6 +1,5 @@
 "use client";
 import { AnimatedTestimonialsDemo } from "@/snippets/animatedTestimonialsDemo";
-import Image from "next/image";
 
 
 const Client = () => {

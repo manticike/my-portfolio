@@ -1,6 +1,5 @@
 "use client";
 import { AnimatedTestimonialsDemo } from "@/snippets/animatedTestimonialsDemo-2";
-import Image from "next/image";
 
 
 const About = () => {
