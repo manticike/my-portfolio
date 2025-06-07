@@ -23,7 +23,7 @@ const Hero = () => {
             <div className="relative z-10 flex h-full items-center justify-center">
                 <div className="text-center text-white px-4">
                     <h1 className="text-4xl md:text-6xl font-bold mb-4">Isaac Antwi</h1>
-                    <p className="text-xl md:text-2xl mb-8">Your Tagline or Brief Description</p>
+                    <p className="text-xl md:text-2xl mb-8">From concept to code: I bring digital ideas to life.</p>
                 </div>
             </div>
         </div>

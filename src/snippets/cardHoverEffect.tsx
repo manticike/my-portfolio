@@ -1,4 +1,12 @@
 import { HoverEffect } from "../components/ui/card-hover-effect";
+import { 
+  PiMonitor,
+  PiStorefront,
+  PiAppStoreLogo,
+  PiPackageFill,
+  PiHeadsetFill,
+  PiShoppingCart
+} from "react-icons/pi";
 
 export function CardHoverEffectDemo() {
   return (
@@ -7,35 +15,42 @@ export function CardHoverEffectDemo() {
     </div>
   );
 }
+
 export const projects = [
   {
     title: "Website",
     description:
-      "A technology company that builds economic infrastructure for the internet.",
+       "Crafting modern, responsive websites that blend creativity with functionality to deliver an exceptional user experience.",
+    icon: <PiMonitor className="w-8 h-8" />,
   },
   {
     title: "E-Commerce Website",
     description:
-      "A streaming service that offers a wide variety of award-winning TV shows, movies, anime, documentaries, and more on thousands of internet-connected devices.",
+      "Building powerful online stores with seamless shopping experiences, secure payments, and scalable solutions.",
+    icon: <PiStorefront className="w-8 h-8" />,
   },
   {
     title: "Mobile App",
     description:
-      "A multinational technology company that specializes in Internet-related services and products.",
+     "Developing intuitive and high-performance mobile and web applications tailored to your business needs.",
+    icon: <PiAppStoreLogo className="w-8 h-8" />,
   },
   {
     title: "Inventory Management App",
     description:
-      "A technology company that focuses on building products that advance Facebook's mission of bringing the world closer together.",
+      "Creating smart inventory systems that help you track, manage, and optimize your stock efficiently in real-time.",
+    icon: <PiPackageFill className="w-8 h-8" />,
   },
   {
     title: "Shopify Stores",
     description:
-      "A multinational technology company focusing on e-commerce, cloud computing, digital streaming, and artificial intelligence.",
+      "Launch your online business with a custom-designed Shopify store tailored to your brand and built to convert.",
+    icon: <PiShoppingCart className="w-8 h-8" />,
   },
   {
     title: "Tech Support",
     description:
-      "A multinational technology company that develops, manufactures, licenses, supports, and sells computer software, consumer electronics, personal computers, and related services.",
+     "Providing ongoing technical support to keep your website or application running smoothly, securely, and up-to-date.",
+    icon: <PiHeadsetFill className="w-8 h-8" />,
   },
 ];
