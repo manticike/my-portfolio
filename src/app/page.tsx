@@ -8,12 +8,29 @@ import Services from "@/components/sections/Services";
 export default function Home() {
   return (
     <div>
-      <Hero />
-      <Portfolio />
-      <About />
-      <Services />
-      <Client />
-      <Contact />
+      <section id="home">
+        <Hero />
+      </section>
+      
+      <section id="portfolio">
+        <Portfolio />
+      </section>
+      
+      <section id="about">
+        <About />
+      </section>
+      
+      <section id="services">
+        <Services />
+      </section>
+      
+      <section id="testimonials">  {/* Changed from Client to testimonials to match navbar */}
+        <Client />
+      </section>
+      
+      <section id="contact">
+        <Contact />
+      </section>
     </div>
   );
 }
