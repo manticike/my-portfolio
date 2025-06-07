@@ -24,7 +24,7 @@ export default function Home() {
         <Services />
       </section>
       
-      <section id="testimonials">  {/* Changed from Client to testimonials to match navbar */}
+      <section id="testimonials"> 
         <Client />
       </section>
       
