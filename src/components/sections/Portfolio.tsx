@@ -1,6 +1,4 @@
 "use client";
-import Image from "next/image";
-import { ParallaxScroll } from "../ui/parallax-scroll";
 import { ParallaxScrollDemo } from "@/snippets/parallaxScrollDemo";
 
 

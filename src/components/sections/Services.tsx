@@ -1,6 +1,5 @@
 "use client";
 import { CardHoverEffectDemo } from "@/snippets/cardHoverEffect";
-import Image from "next/image";
 
 
 const Services = () => {
