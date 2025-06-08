@@ -1,4 +1,5 @@
-// types/blog.d.ts
+import { PortableTextBlock } from '@sanity/types';
+
 export interface BlogPost {
   _id: string;
   _createdAt: string;
@@ -13,7 +14,7 @@ export interface BlogPost {
     };
     alt?: string;
   };
-  body: any[]; // For portable text
+  body: PortableTextBlock[];
   featured?: boolean;
 }
 
