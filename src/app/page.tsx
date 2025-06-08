@@ -1,6 +1,7 @@
 import About from "@/components/sections/About";
 import Client from "@/components/sections/Client";
 import Contact from "@/components/sections/Contact";
+import FeaturedPosts from "@/components/sections/FeaturedPosts";
 import Hero from "@/components/sections/Hero";
 import Portfolio from "@/components/sections/Portfolio";
 import Services from "@/components/sections/Services";
@@ -28,6 +29,9 @@ export default function Home() {
         <Client />
       </section>
       
+      <section id="blog">
+        <FeaturedPosts />
+      </section>
       <section id="contact">
         <Contact />
       </section>

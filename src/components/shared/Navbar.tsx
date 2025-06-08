@@ -69,7 +69,7 @@ const Navbar = () => {
             {/* Right side links - hidden on mobile */}
             <div className="hidden md:flex space-x-2 md:space-x-4">
               <NavLink href="#testimonials">Testimonials</NavLink>
-              <NavLink href="#blog">Blog</NavLink>
+              <NavLink href="/blog/page">Blog</NavLink>
               <NavLink href="#contact">Contact</NavLink>
             </div>
           </div>
