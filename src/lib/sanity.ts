@@ -1,4 +1,5 @@
 // src/lib/sanity.ts
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createClient, SanityClient } from '@sanity/client';
 import imageUrlBuilder from '@sanity/image-url';
 import type { SanityImageSource } from '@sanity/image-url/lib/types/types';
