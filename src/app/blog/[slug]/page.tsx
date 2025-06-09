@@ -1,4 +1,3 @@
-// src/app/blog/[slug]/page.tsx
 import { client } from '@/lib/sanity';
 import { groq } from 'next-sanity';
 import { PortableText } from '@portabletext/react';
@@ -17,9 +16,12 @@ const postQuery = groq`
   }
 `;
 
-// ✅ MAIN PAGE FUNCTION
-export default async function Page({ params }: { params: { slug: string } }) {
-  const post = await client.fetch(postQuery, { slug: params.slug });
+type RouteParams = { slug: string };
+
+// ✅ Main Page Component
+export default async function Page({ params }: { params: Promise<RouteParams> }) {
+  const { slug } = await params;
+  const post = await client.fetch(postQuery, { slug });
 
   if (!post) {
     return <div>Post not found</div>;
@@ -48,9 +50,10 @@ export default async function Page({ params }: { params: { slug: string } }) {
   );
 }
 
-// ✅ METADATA FUNCTION
-export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const post = await client.fetch(postQuery, { slug: params.slug });
+// ✅ Metadata for SEO
+export async function generateMetadata({ params }: { params: Promise<RouteParams> }) {
+  const { slug } = await params;
+  const post = await client.fetch(postQuery, { slug });
 
   return {
     title: post?.title || 'Post not found',
