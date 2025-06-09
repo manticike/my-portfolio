@@ -17,12 +17,21 @@ const postQuery = groq`
   }
 `;
 
-export default async function BlogPostPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
+interface BlogPostPageProps {
+  params: {
+    slug: string;
+  };
+  searchParams?: {
+    [key: string]: string | string[] | undefined;
+  };
+}
+
+export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const post = await client.fetch(postQuery, { slug: params.slug });
+
+  if (!post) {
+    return <div>Post not found</div>;
+  }
 
   return (
     <article className="max-w-3xl mx-auto py-12 px-4">
@@ -35,6 +44,7 @@ export default async function BlogPostPage({
             alt={post.mainImage.alt || post.title}
             fill
             className="object-cover rounded-lg"
+            priority
           />
         </div>
       )}
@@ -44,4 +54,13 @@ export default async function BlogPostPage({
       </div>
     </article>
   );
+}
+
+export async function generateMetadata({ params }: BlogPostPageProps) {
+  const post = await client.fetch(postQuery, { slug: params.slug });
+
+  return {
+    title: post?.title,
+    description: post?.excerpt,
+  };
 }
