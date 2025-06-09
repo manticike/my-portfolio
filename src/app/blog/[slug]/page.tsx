@@ -17,16 +17,12 @@ const postQuery = groq`
   }
 `;
 
-interface BlogPostPageProps {
-  params: {
-    slug: string;
-  };
-  searchParams?: {
-    [key: string]: string | string[] | undefined;
-  };
+interface PageProps {
+  params: { slug: string };
+  searchParams?: { [key: string]: string | string[] | undefined };
 }
 
-export default async function BlogPostPage({ params }: BlogPostPageProps) {
+export default async function BlogPostPage({ params }: PageProps) {
   const post = await client.fetch(postQuery, { slug: params.slug });
 
   if (!post) {
@@ -56,11 +52,16 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   );
 }
 
-export async function generateMetadata({ params }: BlogPostPageProps) {
+export async function generateMetadata({ params }: PageProps) {
   const post = await client.fetch(postQuery, { slug: params.slug });
 
   return {
     title: post?.title,
     description: post?.excerpt,
+    openGraph: {
+      title: post?.title,
+      description: post?.excerpt,
+      images: post?.mainImage ? [urlFor(post.mainImage).url()] : [],
+    },
   };
 }
