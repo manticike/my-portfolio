@@ -17,12 +17,11 @@ const postQuery = groq`
   }
 `;
 
-interface PageProps {
+export default async function BlogPostPage({
+  params,
+}: {
   params: { slug: string };
-  searchParams?: { [key: string]: string | string[] | undefined };
-}
-
-export default async function BlogPostPage({ params }: PageProps) {
+}) {
   const post = await client.fetch(postQuery, { slug: params.slug });
 
   if (!post) {
@@ -32,7 +31,7 @@ export default async function BlogPostPage({ params }: PageProps) {
   return (
     <article className="max-w-3xl mx-auto py-12 px-4">
       <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
-      
+
       {post.mainImage && (
         <div className="relative h-64 w-full mb-8">
           <Image
@@ -44,7 +43,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           />
         </div>
       )}
-      
+
       <div className="prose max-w-none">
         <PortableText value={post.body} />
       </div>
@@ -52,15 +51,19 @@ export default async function BlogPostPage({ params }: PageProps) {
   );
 }
 
-export async function generateMetadata({ params }: PageProps) {
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const post = await client.fetch(postQuery, { slug: params.slug });
 
   return {
-    title: post?.title,
-    description: post?.excerpt,
+    title: post?.title || 'Post not found',
+    description: post?.excerpt || '',
     openGraph: {
-      title: post?.title,
-      description: post?.excerpt,
+      title: post?.title || 'Post not found',
+      description: post?.excerpt || '',
       images: post?.mainImage ? [urlFor(post.mainImage).url()] : [],
     },
   };
