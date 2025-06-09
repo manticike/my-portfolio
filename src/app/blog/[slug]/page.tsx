@@ -1,4 +1,4 @@
-// app/blog/[slug]/page.tsx
+// src/app/blog/[slug]/page.tsx
 import { client } from '@/lib/sanity';
 import { groq } from 'next-sanity';
 import { PortableText } from '@portabletext/react';
@@ -17,11 +17,8 @@ const postQuery = groq`
   }
 `;
 
-export default async function BlogPostPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
+// ✅ MAIN PAGE FUNCTION
+export default async function Page({ params }: { params: { slug: string } }) {
   const post = await client.fetch(postQuery, { slug: params.slug });
 
   if (!post) {
@@ -51,11 +48,8 @@ export default async function BlogPostPage({
   );
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
-}) {
+// ✅ METADATA FUNCTION
+export async function generateMetadata({ params }: { params: { slug: string } }) {
   const post = await client.fetch(postQuery, { slug: params.slug });
 
   return {
