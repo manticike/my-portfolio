@@ -7,6 +7,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { BlogPost } from '@/types/blog';
+import type { PageProps } from '@/types/page-props';
 
 const postQuery = groq`
   *[_type == "post" && slug.current == $slug][0] {
@@ -37,11 +38,7 @@ export async function generateStaticParams() {
   }
 }
 
-export default async function BlogPostPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
+export default async function BlogPostPage({ params }: PageProps) {
   let post: BlogPost | null = null;
 
   try {
@@ -93,11 +90,7 @@ export default async function BlogPostPage({
   );
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
-}) {
+export async function generateMetadata({ params }: PageProps) {
   try {
     const post = await client.fetch<BlogPost>(postQuery, { slug: params.slug }, {
       next: { revalidate: 60 },
