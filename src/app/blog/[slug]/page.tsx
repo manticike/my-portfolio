@@ -1,4 +1,4 @@
-export const dynamic = "force-dynamic";
+export const dynamic = 'force-dynamic';
 
 import { client, urlFor } from '@/lib/sanity';
 import { groq } from 'next-sanity';
@@ -21,30 +21,39 @@ const postQuery = groq`
 `;
 
 export async function generateStaticParams() {
-  const posts = await client.fetch<{ slug: string }[]>(
-    groq`*[_type == "post" && defined(slug.current)] {
-      "slug": slug.current
-    }`
-  );
+  try {
+    const posts = await client.fetch<{ slug: string }[]>(
+      groq`*[_type == "post" && defined(slug.current)] {
+        "slug": slug.current
+      }`
+    );
 
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
+    return posts.map((post) => ({
+      slug: post.slug,
+    }));
+  } catch (error) {
+    console.error('Failed to fetch static params:', error);
+    return [];
+  }
 }
 
 export default async function BlogPostPage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }) {
-  const { slug } = await params;
+  let post: BlogPost | null = null;
 
-  const post = await client.fetch<BlogPost>(postQuery, { slug }, {
-    next: {
-      tags: ['post'],
-      revalidate: 60,
-    },
-  });
+  try {
+    post = await client.fetch(postQuery, { slug: params.slug }, {
+      next: {
+        tags: ['post'],
+        revalidate: 60,
+      },
+    });
+  } catch (error) {
+    console.error(`Error fetching post for slug "${params.slug}":`, error);
+  }
 
   if (!post) {
     notFound();
@@ -87,27 +96,28 @@ export default async function BlogPostPage({
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }) {
-  const { slug } = await params;
+  try {
+    const post = await client.fetch<BlogPost>(postQuery, { slug: params.slug }, {
+      next: { revalidate: 60 },
+    });
 
-  const post = await client.fetch<BlogPost>(postQuery, { slug }, {
-    next: { revalidate: 60 },
-  });
+    if (!post) {
+      return { title: 'Post not found' };
+    }
 
-  if (!post) {
     return {
-      title: 'Post not found',
-    };
-  }
-
-  return {
-    title: post.title,
-    description: post.excerpt || '',
-    openGraph: {
       title: post.title,
       description: post.excerpt || '',
-      images: post.mainImage ? [urlFor(post.mainImage).url()] : [],
-    },
-  };
+      openGraph: {
+        title: post.title,
+        description: post.excerpt || '',
+        images: post.mainImage ? [urlFor(post.mainImage).url()] : [],
+      },
+    };
+  } catch (error) {
+    console.error(`Metadata fetch failed for slug "${params.slug}":`, error);
+    return { title: 'Post error' };
+  }
 }
