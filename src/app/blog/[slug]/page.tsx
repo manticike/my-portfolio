@@ -1,5 +1,3 @@
-export const dynamic = 'force-dynamic';
-
 import { client, urlFor } from '@/lib/sanity';
 import { groq } from 'next-sanity';
 import { PortableText } from '@portabletext/react';
@@ -7,7 +5,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { BlogPost } from '@/types/blog';
-import type { PageProps } from '@/types/page-props';
+
+export const dynamic = 'force-dynamic';
 
 const postQuery = groq`
   *[_type == "post" && slug.current == $slug][0] {
@@ -21,7 +20,7 @@ const postQuery = groq`
   }
 `;
 
-// Generate static paths for all blog posts (optional if you want full dynamic)
+// Optional: Pre-generate paths
 export async function generateStaticParams() {
   try {
     const posts = await client.fetch<{ slug: string }[]>(
@@ -39,33 +38,45 @@ export async function generateStaticParams() {
   }
 }
 
-// Render a single blog post
-export default async function BlogPostPage({ params }: PageProps) {
+// ✅ Render a single blog post page
+export default async function BlogPostPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
   let post: BlogPost | null = null;
 
   try {
     post = await client.fetch(postQuery, { slug: params.slug }, {
       next: {
         tags: ['post'],
-        revalidate: 60, // ISR every 60 seconds
+        revalidate: 60,
       },
     });
   } catch (error) {
     console.error(`Error fetching post for slug "${params.slug}":`, error);
   }
 
-  if (!post) {
-    notFound(); // Show 404 page
-  }
+  if (!post) notFound();
 
   return (
     <article className="max-w-3xl mx-auto py-12 px-4">
-      <Link 
-        href="/blog" 
+      <Link
+        href="/blog"
         className="mb-6 inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors"
       >
-        <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        <svg
+          className="w-5 h-5 mr-2"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M10 19l-7-7m0 0l7-7m-7 7h18"
+          />
         </svg>
         Back to Blog
       </Link>
@@ -92,12 +103,20 @@ export default async function BlogPostPage({ params }: PageProps) {
   );
 }
 
-// Generate metadata for SEO
-export async function generateMetadata({ params }: PageProps) {
+// ✅ Metadata for SEO
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}) {
   try {
-    const post = await client.fetch<BlogPost>(postQuery, { slug: params.slug }, {
-      next: { revalidate: 60 },
-    });
+    const post = await client.fetch<BlogPost>(
+      postQuery,
+      { slug: params.slug },
+      {
+        next: { revalidate: 60 },
+      }
+    );
 
     if (!post) {
       return { title: 'Post not found' };
