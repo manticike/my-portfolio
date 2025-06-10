@@ -21,6 +21,7 @@ const postQuery = groq`
   }
 `;
 
+// Generate static paths for all blog posts (optional if you want full dynamic)
 export async function generateStaticParams() {
   try {
     const posts = await client.fetch<{ slug: string }[]>(
@@ -38,6 +39,7 @@ export async function generateStaticParams() {
   }
 }
 
+// Render a single blog post
 export default async function BlogPostPage({ params }: PageProps) {
   let post: BlogPost | null = null;
 
@@ -45,7 +47,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     post = await client.fetch(postQuery, { slug: params.slug }, {
       next: {
         tags: ['post'],
-        revalidate: 60,
+        revalidate: 60, // ISR every 60 seconds
       },
     });
   } catch (error) {
@@ -53,7 +55,7 @@ export default async function BlogPostPage({ params }: PageProps) {
   }
 
   if (!post) {
-    notFound();
+    notFound(); // Show 404 page
   }
 
   return (
@@ -90,6 +92,7 @@ export default async function BlogPostPage({ params }: PageProps) {
   );
 }
 
+// Generate metadata for SEO
 export async function generateMetadata({ params }: PageProps) {
   try {
     const post = await client.fetch<BlogPost>(postQuery, { slug: params.slug }, {
