@@ -21,11 +21,12 @@ export interface BlogListProps {
   limit?: number;
 }
 
-// Updated for Next.js 15 - params is now a Promise
+// Updated for Next.js 15 - both params and searchParams are now Promises
 export interface BlogPageParams {
   params: Promise<{
     slug: string;
   }>;
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 export interface BlogPageProps {
