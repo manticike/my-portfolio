@@ -20,7 +20,7 @@ const postQuery = groq`
   }
 `;
 
-// Optional: Pre-generate paths
+// ✅ Optional: Pre-generate paths for static rendering
 export async function generateStaticParams() {
   try {
     const posts = await client.fetch<{ slug: string }[]>(
