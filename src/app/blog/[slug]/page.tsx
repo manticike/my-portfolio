@@ -4,7 +4,7 @@ import { PortableText } from '@portabletext/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import type { BlogPost, BlogPageParams } from '@/types/blog';
+import type { BlogPost, BlogPageParams, BlogSlugData } from '@/types/blog';
 
 export const dynamic = 'force-dynamic';
 
@@ -22,20 +22,23 @@ const postQuery = groq`
 `;
 
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
-  const posts = await client.fetch<Pick<BlogPost, 'slug'>[]>(
+  const posts = await client.fetch<BlogSlugData[]>(
     groq`*[_type == "post" && defined(slug.current)] {
       "slug": slug.current
     }`
   );
 
   return posts.map((post) => ({
-    slug: post.slug.current, // Access the current property
+    slug: post.slug // Use the string slug directly, not slug.current
   }));
 }
 
 export default async function BlogPostPage({ params }: BlogPageParams) {
+  // Await the params since they're now async in Next.js 15
+  const { slug } = await params;
+  
   const post = await client.fetch<BlogPost | null>(postQuery, { 
-    slug: params.slug 
+    slug: slug // Use the awaited slug
   }, {
     next: {
       tags: ['post'],
@@ -75,7 +78,10 @@ export default async function BlogPostPage({ params }: BlogPageParams) {
 }
 
 export async function generateMetadata({ params }: BlogPageParams) {
-  const post = await client.fetch<BlogPost>(postQuery, { slug: params.slug }, {
+  // Await the params since they're now async in Next.js 15
+  const { slug } = await params;
+  
+  const post = await client.fetch<BlogPost>(postQuery, { slug: slug }, {
     next: { revalidate: 60 },
   });
 

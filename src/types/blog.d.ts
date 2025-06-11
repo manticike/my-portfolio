@@ -21,13 +21,18 @@ export interface BlogListProps {
   limit?: number;
 }
 
-// Add this for your page props
+// Updated for Next.js 15 - params is now a Promise
 export interface BlogPageParams {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export interface BlogPageProps {
   post: BlogPost;
+}
+
+// Type for the slug data returned from Sanity
+export interface BlogSlugData {
+  slug: string;
 }
