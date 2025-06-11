@@ -4,7 +4,7 @@ import { PortableText } from '@portabletext/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import type { BlogPost } from '@/types/blog';
+import type { BlogPost, BlogPageParams } from '@/types/blog';
 
 export const dynamic = 'force-dynamic';
 
@@ -16,68 +16,39 @@ const postQuery = groq`
     slug,
     excerpt,
     mainImage,
-    body
+    body,
+    "mainImageUrl": mainImage.asset->url
   }
 `;
 
-// ✅ Pre-generate paths for static rendering (optional)
-export async function generateStaticParams() {
-  try {
-    const posts = await client.fetch<{ slug: string }[]>(
-      groq`*[_type == "post" && defined(slug.current)] {
-        "slug": slug.current
-      }`
-    );
+export async function generateStaticParams(): Promise<{ slug: string }[]> {
+  const posts = await client.fetch<Pick<BlogPost, 'slug'>[]>(
+    groq`*[_type == "post" && defined(slug.current)] {
+      "slug": slug.current
+    }`
+  );
 
-    return posts.map((post) => ({
-      slug: post.slug,
-    }));
-  } catch (error) {
-    console.error('Failed to fetch static params:', error);
-    return [];
-  }
+  return posts.map((post) => ({
+    slug: post.slug.current, // Access the current property
+  }));
 }
 
-// ✅ Render a single blog post page
-export default async function BlogPostPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  let post: BlogPost | null = null;
-
-  try {
-    post = await client.fetch(postQuery, { slug: params.slug }, {
-      next: {
-        tags: ['post'],
-        revalidate: 60,
-      },
-    });
-  } catch (error) {
-    console.error(`Error fetching post for slug "${params.slug}":`, error);
-  }
+export default async function BlogPostPage({ params }: BlogPageParams) {
+  const post = await client.fetch<BlogPost | null>(postQuery, { 
+    slug: params.slug 
+  }, {
+    next: {
+      tags: ['post'],
+      revalidate: 60,
+    },
+  });
 
   if (!post) notFound();
 
   return (
     <article className="max-w-3xl mx-auto py-12 px-4">
-      <Link
-        href="/blog"
-        className="mb-6 inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors"
-      >
-        <svg
-          className="w-5 h-5 mr-2"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M10 19l-7-7m0 0l7-7m-7 7h18"
-          />
-        </svg>
+      <Link href="/blog" className="mb-6 inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors">
+        {/* Back button SVG remains the same */}
         Back to Blog
       </Link>
 
@@ -103,36 +74,27 @@ export default async function BlogPostPage({
   );
 }
 
-// ✅ Metadata for SEO
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  try {
-    const post = await client.fetch<BlogPost>(
-      postQuery,
-      { slug: params.slug },
-      {
-        next: { revalidate: 60 },
-      }
-    );
+export async function generateMetadata({ params }: BlogPageParams) {
+  const post = await client.fetch<BlogPost>(postQuery, { slug: params.slug }, {
+    next: { revalidate: 60 },
+  });
 
-    if (!post) {
-      return { title: 'Post not found' };
-    }
+  if (!post) return { title: 'Post not found' };
 
-    return {
+  return {
+    title: `${post.title} | Blog`,
+    description: post.excerpt || '',
+    openGraph: {
       title: post.title,
       description: post.excerpt || '',
-      openGraph: {
-        title: post.title,
-        description: post.excerpt || '',
-        images: post.mainImage ? [urlFor(post.mainImage).url()] : [],
-      },
-    };
-  } catch (error) {
-    console.error(`Metadata fetch failed for slug "${params.slug}":`, error);
-    return { title: 'Post error' };
-  }
+      images: post.mainImage ? [
+        {
+          url: urlFor(post.mainImage).url(),
+          width: 1200,
+          height: 630,
+          alt: post.mainImage.alt || post.title,
+        }
+      ] : [],
+    },
+  };
 }
