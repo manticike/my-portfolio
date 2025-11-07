@@ -26,7 +26,7 @@ const Navbar = () => {
         ${scrolled ? 'bg-gray-900/90 backdrop-blur-sm py-4' : 'bg-transparent py-8'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="flex justify-between items-center">
-           
+
 
             {/* Desktop; Left Navigation Links - hidden on mobile */}
             <div className="hidden md:flex space-x-3 md:space-x-6">
@@ -39,17 +39,17 @@ const Navbar = () => {
             {/* Logo - centered on mobile, normal position on desktop */}
             <div className="flex-1 flex justify-center md:justify-start md:flex-none">
               <Link href="/" className="flex items-center">
-                <Image 
-                  src="/logo.svg" 
-                  alt="my logo" 
-                  width={120} 
-                  height={40} 
+                <Image
+                  src="/logo.png"
+                  alt="my logo"
+                  width={120}
+                  height={40}
                   className="h-8 w-auto"
                 />
               </Link>
             </div>
 
-             {/* Mobile menu button - only shows on small screens */}
+            {/* Mobile menu button - only shows on small screens */}
             <div className="flex md:hidden">
               <button
                 onClick={() => setIsOpen(!isOpen)}
@@ -97,11 +97,11 @@ const Navbar = () => {
 // Desktop NavLink component
 const NavLink = ({ href, children }: { href: string; children: React.ReactNode }) => {
   return (
-    <Link 
-      href={href} 
+    <Link
+      href={href}
       className="relative text-stone-50 cursor-pointer px-2 py-1:"
     >
-         <span className="relative inline-block">
+      <span className="relative inline-block">
         {children}
         <span className="absolute left-0 bottom-0 w-full h-0.5 bg-stone-50 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-bottom-right duration-300 -mb-1"></span>
       </span>
@@ -112,8 +112,8 @@ const NavLink = ({ href, children }: { href: string; children: React.ReactNode }
 // Mobile NavLink component
 const MobileNavLink = ({ href, children, onClick }: { href: string; children: React.ReactNode; onClick: () => void }) => {
   return (
-    <Link 
-      href={href} 
+    <Link
+      href={href}
       onClick={onClick}
       className="text-stone-50 hover:text-gray-300 py-3 block"
     >
