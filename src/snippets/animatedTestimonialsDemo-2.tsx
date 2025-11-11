@@ -2,9 +2,9 @@ import { AnimatedTestimonials } from "../components/ui/animated-testimonials";
 
 export function AnimatedTestimonialsDemo() {
   const testimonials = [
-    { 
+    {
       quote:
-        "I'm a Full Stack Web Developer who helps businesses and individuals turn ideas into fully functional, responsive, and scalable web applications. From building sleek front-end interfaces to developing powerful back-end systems, I deliver custom solutions tailored to your needs. Whether you're looking to launch a new product, improve your website's performance, or automate business processes, I can help bring your vision to life with clean, efficient code and a user-first approach.",
+        "I build websites that don't just look good - they bring in paying customers. For HVAC contractors, roofers, and home-service pros, a website is your 24/7 sales rep. I create mobile-friendly, fast, and conversion-focused websites that attract and turn visitors into calls, leads, and booked jobs. Stop losing customers to competitors with outdated sites. Whether you nedd a new website, an upgrade to boost performance, or automation to simplify your business, I deliver solutions that grow your revenue and save you time.  With me, your business gets a website that works as hard as you do - generating leads while you focus on the job.",
       name: "Isaac Antwi",
       designation: "Full Stack Web Developer",
       src: "/about-image.jpg"
