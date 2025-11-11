@@ -22,9 +22,9 @@ export const AnimatedTestimonials = ({
     setActive((prev) => (prev + 1) % testimonials.length);
   };
 
-  const handlePrev = () => {
-    setActive((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  };
+  // const handlePrev = () => {
+  //   setActive((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  // };
 
   const isActive = (index: number) => {
     return index === active;
