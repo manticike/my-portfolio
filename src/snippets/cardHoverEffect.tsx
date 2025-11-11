@@ -1,5 +1,5 @@
 import { HoverEffect } from "../components/ui/card-hover-effect";
-import { 
+import {
   PiMonitor,
   PiStorefront,
   PiAppStoreLogo,
@@ -18,39 +18,39 @@ export function CardHoverEffectDemo() {
 
 export const projects = [
   {
-    title: "Website",
+    title: "Website Design & Development",
     description:
-       "Crafting modern, responsive websites that blend creativity with functionality to deliver an exceptional user experience.",
+      "Custom WordPress and React/Next.js websites built for HVAC and roofing contractors. Designed to look professional, load fast, and turn visitors into paying customers.",
     icon: <PiMonitor className="w-8 h-8" />,
   },
   {
-    title: "E-Commerce Website",
+    title: "Local SEO Setup",
     description:
-      "Building powerful online stores with seamless shopping experiences, secure payments, and scalable solutions.",
+      "Get found on Google Maps and local search results when customers search for “HVAC near me” or “roof repair near me.” Attract more calls and leads from your area.",
     icon: <PiStorefront className="w-8 h-8" />,
   },
   {
-    title: "Mobile App",
+    title: "Website Redesigns",
     description:
-     "Developing intuitive and high-performance mobile and web applications tailored to your business needs.",
+      "Modernize old websites with faster loading times, mobile-friendly layouts, and updated designs that keep customers engaged.",
     icon: <PiAppStoreLogo className="w-8 h-8" />,
   },
   {
-    title: "Inventory Management App",
+    title: "Google Business Profile Itegration",
     description:
-      "Creating smart inventory systems that help you track, manage, and optimize your stock efficiently in real-time.",
+      "Optimize or set up your Google My Business profile so clients can find you, read reviews, and call instantly from search results.",
     icon: <PiPackageFill className="w-8 h-8" />,
   },
   {
-    title: "Shopify Stores",
+    title: "Lead Generation Landing Pages",
     description:
-      "Launch your online business with a custom-designed Shopify store tailored to your brand and built to convert.",
+      "High-converting landing pages for specific services, seasonal promotions, or ad campaigns that bring more inquiries directly to your inbox.",
     icon: <PiShoppingCart className="w-8 h-8" />,
   },
   {
-    title: "Tech Support",
+    title: "Maintenance & Updates",
     description:
-     "Providing ongoing technical support to keep your website or application running smoothly, securely, and up-to-date.",
+      "Keep your website secure, backed up, and performing at its best — so you never miss a potential customer.Keep your website secure, backed up, and performing.",
     icon: <PiHeadsetFill className="w-8 h-8" />,
   },
 ];

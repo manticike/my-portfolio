@@ -22,8 +22,8 @@ const Hero = () => {
             {/* Content */}
             <div className="relative z-10 flex h-full items-center justify-center">
                 <div className="text-center text-white px-4">
-                    <h1 className="text-4xl md:text-6xl font-bold mb-4">Isaac Antwi</h1>
-                    <p className="text-xl md:text-2xl mb-8">Building your online presence — beautifully crafted, lightning fast.</p>
+                    <h1 className="text-4xl md:text-6xl font-bold mb-4">Websites that help HVAC and Roofing Companies Get More Calls</h1>
+                    <p className="text-xl md:text-2xl mb-8">Most home-service websites sit online collecting dust — looking nice but bringing zero leads. I build mobile-optimized, conversion-focused websites that turn visitors into real paying customers.</p>
                 </div>
             </div>
         </div>
