@@ -23,5 +23,14 @@ const images = [
     clientLink: "https://www.antisaac.com/",
     projectDate: "July 2025",
     technologies: ["React", "Next.js", "TailwindCSS", "Shadcn UI"]
+  },
+  {
+    url: "/images/plumbing.png",
+    title: "A sample plumbing website",
+    description: "A mobile and SEO-friendly sample website for a local plumbing business",
+    role: "Developer",
+    clientLink: "https://sample-plumbing-site.page.gd/home/",
+    projectDate: "December 2025",
+    technologies: ["WordPress", "Elementor Page Builder"]
   }
 ];
