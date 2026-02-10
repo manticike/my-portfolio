@@ -23,7 +23,7 @@ const Hero = () => {
             <div className="relative z-10 flex h-full items-center justify-center">
                 <div className="text-center text-white px-4">
                     <h1 className="text-4xl md:text-6xl font-bold mb-4">Get 15-30 More Service Calls Every Month</h1>
-                    <p className="text-xl md:text-2xl mb-8">Professional websites + Google Ads for HVAC, Roofing, Plumbing and Electrical companies. Stop losing jobs to competitors who show up first on Google.</p>
+                    <p className="text-xl md:text-2xl mb-8">Professional websites, Google Ads for HVAC, Roofing, Plumbing and Electrical companies. Stop losing jobs to competitors who show up first on Google.</p>
                 </div>
             </div>
         </div>
