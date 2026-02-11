@@ -41,12 +41,14 @@ const Navbar = () => {
               <Link href="/" className="flex items-center">
                 <Image
                   src="/logo.png"
-                  alt="my logo"
-                  width={120}
-                  height={40}
-                  className="h-8 w-auto"
+                  alt="Antisaac Logo"
+                  width={160}
+                  height={60}
+                  priority
+                  className="object-contain"
                 />
               </Link>
+
             </div>
 
             {/* Mobile menu button - only shows on small screens */}
