@@ -69,11 +69,21 @@ const Navbar = () => {
 
 
             {/* Right side links - hidden on mobile */}
-            <div className="hidden md:flex space-x-2 md:space-x-4">
+            {/* Right side links + phone - hidden on mobile */}
+            <div className="hidden md:flex items-center space-x-4">
               <NavLink href="#testimonials">Testimonials</NavLink>
               <NavLink href="/blog/page">Blog</NavLink>
               <NavLink href="#contact">Contact</NavLink>
+
+              {/* Clickable phone number */}
+              <a
+                href="tel:+12146199140"
+                className="ml-4 px-3 py-1 bg-stone-50 text-gray-900 rounded hover:bg-gray-200 transition"
+              >
+                +1(214)619-9140
+              </a>
             </div>
+
           </div>
         </div>
       </nav>
