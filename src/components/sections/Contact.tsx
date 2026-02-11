@@ -37,7 +37,7 @@ export default function Contact() {
     try {
       const response = await fetch("/api/send", {
         method: "POST",
-        headers: { 
+        headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
@@ -57,8 +57,8 @@ export default function Contact() {
     } catch (error) {
       setSubmitStatus({
         success: false,
-        message: error instanceof Error 
-          ? error.message 
+        message: error instanceof Error
+          ? error.message
           : "Failed to send message. Please try again later.",
       });
     } finally {
@@ -69,7 +69,7 @@ export default function Contact() {
   return (
     <div className="max-w-6xl mx-auto px-4 py-12">
       <h2 className="text-3xl font-bold text-center mb-12">Contact Me</h2>
-      
+
       <div className="flex flex-col md:flex-row gap-8">
         {/* Contact Form */}
         <div className="w-full md:w-1/2 bg-white p-8 rounded-lg shadow-md">
@@ -122,9 +122,8 @@ export default function Contact() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className={`inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${
-                isSubmitting ? 'opacity-75 cursor-not-allowed' : ''
-              }`}
+              className={`inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${isSubmitting ? 'opacity-75 cursor-not-allowed' : ''
+                }`}
             >
               {isSubmitting ? (
                 <>
@@ -143,11 +142,10 @@ export default function Contact() {
             </button>
 
             {submitStatus && (
-              <div className={`p-4 rounded-md ${
-                submitStatus.success 
-                  ? "bg-green-50 text-green-800" 
-                  : "bg-red-50 text-red-800"
-              }`}>
+              <div className={`p-4 rounded-md ${submitStatus.success
+                ? "bg-green-50 text-green-800"
+                : "bg-red-50 text-red-800"
+                }`}>
                 {submitStatus.message}
               </div>
             )}
@@ -157,28 +155,27 @@ export default function Contact() {
         {/* Personal Info Section */}
         <div className="w-full md:w-1/2 bg-gray-50 p-8 rounded-lg shadow-md">
           <h3 className="text-xl text-black font-semibold mb-6">Contact Information</h3>
-          
+
           <div className="space-y-4">
-            <ContactInfoItem 
+            <ContactInfoItem
               icon={<IconMail className="h-6 w-6 text-indigo-600" />}
               title="Email"
               content="antwiisaac52@gmail.com"
             />
-            
-            <ContactInfoItem 
+
+            <ContactInfoItem
               icon={<IconPhone className="h-6 w-6 text-indigo-600" />}
               title="Phone"
-              content="+233 (0) 240-088-924"
+              content="+1 (214)-619-9140"
             />
-            
-            <ContactInfoItem 
+
+            <ContactInfoItem
               icon={<IconMapPin className="h-6 w-6 text-indigo-600" />}
               title="Address"
               content={
                 <>
-                  AE-0611-7974<br />
-                  Kumasi, Ashanti<br />
-                  Ghana
+                  Dallas<br />
+                  Texas
                 </>
               }
             />
@@ -189,8 +186,8 @@ export default function Contact() {
             <h4 className="text-sm font-medium text-gray-500 mb-3">Connect With Me</h4>
             <div className="flex space-x-4">
               {/* Twitter */}
-              <a 
-                href="https://twitter.com/manticike" 
+              <a
+                href="https://twitter.com/manticike"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-500 hover:text-indigo-600 transition-colors"
@@ -202,8 +199,8 @@ export default function Contact() {
               </a>
 
               {/* LinkedIn */}
-              <a 
-                href="https://linkedin.com/in/isaac-antwi" 
+              <a
+                href="https://linkedin.com/in/isaac-antwi"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-500 hover:text-indigo-600 transition-colors"

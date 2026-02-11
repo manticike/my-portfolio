@@ -21,9 +21,26 @@ const Hero = () => {
 
             {/* Content */}
             <div className="relative z-10 flex h-full items-center justify-center">
-                <div className="text-center text-white px-4">
-                    <h1 className="text-4xl md:text-6xl font-bold mb-4">Get 15-30 More Service Calls Every Month</h1>
-                    <p className="text-xl md:text-2xl mb-8">Professional websites, Google Ads for HVAC, Roofing, Plumbing and Electrical companies. Stop losing jobs to competitors who show up first on Google.</p>
+                <div className="text-center text-white px-4 max-w-3xl">
+                    <h1 className="text-4xl md:text-6xl font-bold mb-4">
+                        Get 15–30 More Service Calls Every Month
+                    </h1>
+
+                    <p className="text-xl md:text-2xl mb-8">
+                        Professional websites and Google Ads for HVAC, Roofing,
+                        Plumbing and Electrical companies. Stop losing jobs to
+                        competitors who show up first on Google.
+                    </p>
+
+                    {/* CTA Button */}
+                    <a
+                        href="https://calendly.com/antwiisaac/new-meeting"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block rounded-xl bg-yellow-500 px-8 py-4 text-lg font-semibold text-black hover:bg-yellow-400 transition duration-300"
+                    >
+                        Book a Free Strategy Call
+                    </a>
                 </div>
             </div>
         </div>
